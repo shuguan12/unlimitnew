@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app {
+  @apply p-5 max-w-7xl mx-auto;
+  perspective: 1000px;
+}
+
+.news-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
+  transform-style: preserve-3d;
+}
+
+.news-card {
+  @apply bg-white rounded-lg p-5 shadow-md cursor-pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  transform-origin: center center;
+  transform: rotateY(15deg) rotateX(5deg);
+}
+
+.news-card:hover {
+  transform: rotateY(5deg) rotateX(2deg) scale(1.02);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.news-card.expanded {
+  @apply col-span-1 md:col-span-2 lg:col-span-3;
+  transform: rotateY(0) rotateX(0) scale(1.1);
+  z-index: 10;
+}
+
+.news-card h3 {
+  @apply text-xl font-bold text-dark mb-2;
+}
+
+.news-card p {
+  @apply text-gray-600;
+}
+
+.loading-spinner {
+  @apply animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary;
+}
+
+.news-card-header {
+  @apply flex items-start gap-4 mb-4;
+}
+
+.news-image {
+  @apply w-24 h-24 object-cover rounded-lg;
+}
+
+@media (min-width: 768px) {
+  .news-image {
+    @apply w-32 h-32;
+  }
+}
