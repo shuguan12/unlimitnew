@@ -1,15 +1,44 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.app {
-  @apply p-5 max-w-7xl mx-auto;
-  perspective: 1000px;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
-.news-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
-  transform-style: preserve-3d;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
 
 .news-card {
@@ -20,39 +49,67 @@
   transform: rotateY(15deg) rotateX(5deg);
 }
 
-.news-card:hover {
-  transform: rotateY(5deg) rotateX(2deg) scale(1.02);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.news-card.focused {
+  @apply ring-2 ring-primary;
+  transform: rotateY(10deg) rotateX(3deg) scale(1.05);
+}
+
+.app-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #f5f7fa;
+}
+
+.relations-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.news-space {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.news-card {
+  position: absolute;
+  width: 300px;
+  min-height: 200px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease;
+  transform-origin: center center;
+  will-change: transform, box-shadow, filter;
 }
 
 .news-card.expanded {
-  @apply col-span-1 md:col-span-2 lg:col-span-3;
-  transform: rotateY(0) rotateX(0) scale(1.1);
-  z-index: 10;
+  width: 70vw;
+  min-height: 60vh;
 }
 
-.news-card h3 {
-  @apply text-xl font-bold text-dark mb-2;
+.controls-guide {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 100;
+  max-width: 300px;
 }
 
-.news-card p {
-  @apply text-gray-600;
-}
-
-.loading-spinner {
-  @apply animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary;
-}
-
-.news-card-header {
-  @apply flex items-start gap-4 mb-4;
-}
-
-.news-image {
-  @apply w-24 h-24 object-cover rounded-lg;
-}
-
-@media (min-width: 768px) {
-  .news-image {
-    @apply w-32 h-32;
-  }
+.news-card:hover {
+  transform: scale(1.05);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
 }
